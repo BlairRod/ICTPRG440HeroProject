@@ -6,12 +6,14 @@ import { catchError, map, tap } from 'rxjs/operators';
 
 import { Hero } from './hero';
 import { MessageService } from './message.service';
+import { HEROES } from './mock-heroes';
 
 
 @Injectable({ providedIn: 'root' })
 export class HeroService {
 
-  private heroesUrl = 'https://my.api.mockaroo.com/heroes.json?key=f46bd990';  // URL to web api
+  private heroesUrl = 'https://my.api.mockaroo.com/heroes.json?key=f46bd990';  // URL to web api when using Mockaroo
+  // private heroesUrl = 'api/heroes'; // URL to web api
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -19,7 +21,7 @@ export class HeroService {
 
   constructor(
     private http: HttpClient,
-    private messageService: MessageService) { }
+    private messageService: MessageService) {  }
 
   /** GET heroes from the server */
   getHeroes(): Observable<Hero[]> {
@@ -27,7 +29,7 @@ export class HeroService {
       .pipe(
         tap(_ => this.log('fetched heroes')),
         catchError(this.handleError<Hero[]>('getHeroes', []))
-      );
+    );
   }
 
   /** GET hero by id. Return `undefined` when id not found */

@@ -1,3 +1,4 @@
+import { HeroService } from './hero.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
@@ -22,12 +23,13 @@ import { MessagesComponent } from './messages/messages.component';
     AppRoutingModule,
     HttpClientModule,
 
-    // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
-    // and returns simulated server responses.
-    // Remove it when a real server is ready to receive requests.
+    // If not using Mockaroo API add HttpClientInMemoryWebApiModule module as it intercepts HTTP requests 
+    // and in hero.service.ts change line - private heroesUrl = 'https://my.api.mockaroo.com/heroes.json?key=f46bd990'; to = api/heroes
+
     // HttpClientInMemoryWebApiModule.forRoot(
     //   InMemoryDataService, { dataEncapsulation: false }
     // )
+    
   ],
   declarations: [
     AppComponent,
